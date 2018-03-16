@@ -21,6 +21,42 @@ var postSchema = new mongoose.Schema({
 
 var Post = mongoose.model("Post", postSchema);
 
+//INDEX
+app.get("/posts", function(req, res){
+  Post.find({}, function(err, posts){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("index", { posts: posts });
+    }
+  });
+});
+
+//NEW
+app.get("/posts/new", function(req,res){
+  res.render("new");
+});
+
+//CREATE
+app.post("/posts", function(req, res){
+  var createdDate;
+  var newPost = {
+    title: req.body.title,
+    image: req.body.image,
+    body: req.body.body
+  };
+  if (createdDate){
+    newPost.created = createdDate;
+  }
+
+  Post.create(newPost, function(err, post){
+    if (err){
+      console.log(err);
+    }
+    res.redirect("/posts");
+  });
+});
 
 app.listen(3000, function(){
   console.log("serving on port 3000");

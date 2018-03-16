@@ -1,0 +1,14 @@
+<% include partials/header %>
+
+<h1>New Post</h1>
+
+<form action="/posts" method="POST">
+    <label>Post Title: <input type="text" name="title"></label>
+    <label>Image URL: <input type="text" name="image"></label>
+    <label>Post Body: <input type="text" name="body"></label>
+    <label>Post Date (blank for today): <input type="text" name="created"></label>
+    <input type="submit">
+</form>
+
+
+<% include partials/footer %>

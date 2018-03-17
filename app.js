@@ -22,7 +22,7 @@ var postSchema = new mongoose.Schema({
 var Post = mongoose.model("Post", postSchema);
 
 app.get("/", function(req, res){
-  res.redirect("/blogs");
+  res.redirect("/posts");
 });
 
 //INDEX

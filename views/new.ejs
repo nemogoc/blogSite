@@ -4,16 +4,16 @@
     <div class="ui huge header">New Post</div>
     <form class="ui form" action="/posts" method="POST">
         <div class="field">
-            <label>Post Title: <input type="text" name="blog[title]"></label>
+            <label>Post Title: <input type="text" name="post[title]"></label>
         </div>
         <div class="field">
-            <label>Image URL: <input type="text" name="blog[image]"></label>
+            <label>Image URL: <input type="text" name="post[image]"></label>
         </div>
         <div class="field">
-            <label>Post Body: <textarea name="blog[body]" id="" cols="30" rows="10"></textarea></label>
+            <label>Post Body: <textarea name="post[body]" id="" cols="30" rows="10"></textarea></label>
         </div>
         <div class="field">
-            <label>Post Date (blank for now):  <input type="datetime-local" name="blog[created]"> </label>
+            <label>Post Date (blank for now):  <input type="datetime-local" name="post[created]"> </label>
         </div>
         <input class="ui orange big basic button" type="submit">
     </form>

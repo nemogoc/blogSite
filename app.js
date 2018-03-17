@@ -21,6 +21,10 @@ var postSchema = new mongoose.Schema({
 
 var Post = mongoose.model("Post", postSchema);
 
+app.get("/", function(req, res){
+  res.redirect("/blogs");
+});
+
 //INDEX
 app.get("/posts", function(req, res){
   Post.find({}, function(err, posts){
@@ -41,16 +45,11 @@ app.get("/posts/new", function(req,res){
 //CREATE
 app.post("/posts", function(req, res){
   var createdDate;
-  var newPost = {
-    title: req.body.title,
-    image: req.body.image,
-    body: req.body.body
-  };
-  if (createdDate){
-    newPost.created = createdDate;
+  if (req.body.post.created){
+    req.body.post.created = createdDate;
   }
 
-  Post.create(newPost, function(err, post){
+  Post.create(req.body.post, function(err, post){
     if (err){
       console.log(err);
     }

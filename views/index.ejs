@@ -2,11 +2,15 @@
 
 <h1>Posts</h1>
 
-<ul>
+
 <% posts.forEach(function(post){ %>
-  <li><%= post.title %></li>
+  <div>
+      <h3><%= post.title %></h3>
+      <img src="<%= post.image %>" alt="header image">
+      <p><%= post.date %></p>
+  </div>
 <% }) %>
-</ul>
+
 
 
 <% include partials/footer %>

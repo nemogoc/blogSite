@@ -1,14 +1,22 @@
 <% include partials/header %>
 
-<h1>New Post</h1>
-
-<form action="/posts" method="POST">
-    <label>Post Title: <input type="text" name="title"></label>
-    <label>Image URL: <input type="text" name="image"></label>
-    <label>Post Body: <input type="text" name="body"></label>
-    <label>Post Date (blank for today): <input type="text" name="created"></label>
-    <input type="submit">
-</form>
-
+<div class="ui main text container segment">
+    <div class="ui huge header">New Post</div>
+    <form class="ui form" action="/posts" method="POST">
+        <div class="field">
+            <label>Post Title: <input type="text" name="blog[title]"></label>
+        </div>
+        <div class="field">
+            <label>Image URL: <input type="text" name="blog[image]"></label>
+        </div>
+        <div class="field">
+            <label>Post Body: <textarea name="blog[body]" id="" cols="30" rows="10"></textarea></label>
+        </div>
+        <div class="field">
+            <label>Post Date (blank for now):  <input type="datetime-local" name="blog[created]"> </label>
+        </div>
+        <input class="ui orange big basic button" type="submit">
+    </form>
+</div>
 
 <% include partials/footer %>

@@ -2,12 +2,14 @@ var express = require('express'),
   app = express(),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser'),
-  methodOverride = require('method-override');
+  methodOverride = require('method-override'),
+  expressSanitizer = require('express-sanitizer');
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
+app.use(expressSanitizer());
 mongoose.connect("mongodb://localhost/blogapp", function (err) {
   if (err) {
     console.log("Error connecting: " + err);
@@ -46,6 +48,7 @@ app.get("/posts/new", function (req, res) {
 
 //CREATE
 app.post("/posts", function (req, res) {
+  req.body.post.body = req.sanitize(req.body.post.body);
   Post.create(req.body.post, function (err, post) {
     if (err) {
       console.log(err);
@@ -80,6 +83,7 @@ app.get("/posts/:id/edit", function (req, res) {
 
 //UPDATE
 app.put("/posts/:id", function (req, res) {
+  req.body.post.body = req.sanitize(req.body.post.body);
   Post.findByIdAndUpdate(req.params.id, req.body.post, function (err, post) {
     if (err) {
       res.redirect("/posts");

@@ -10,7 +10,7 @@
                 <span><%= post.created.toDateString() %></span>
             </div>
             <div class="description">
-                <p><%= post.body %></p>
+                <p><%- post.body %></p>
             </div>
             <a class="ui blue basic button" href="/posts/<%= post._id%>/edit">Update</a>
             <form id="delete" method="POST" action="/posts/<%= post._id%>?_method=DELETE">

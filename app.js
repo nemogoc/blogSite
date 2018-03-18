@@ -90,6 +90,19 @@ app.put("/posts/:id", function (req, res) {
   });
 });
 
+//DESTROY
+app.delete("/posts/:id", function(req, res) {
+  Post.findByIdAndDelete(req.params.id, function(err){
+    if (err) {
+      console.log(err);
+      res.redirect("/posts");
+    }
+    else {
+      res.redirect("/posts");
+    }
+  })
+});
+
 app.listen(3000, function () {
   console.log("serving on port 3000");
 });

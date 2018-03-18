@@ -1,11 +1,13 @@
 var express = require('express'),
   app = express(),
   mongoose = require('mongoose'),
-  bodyParser = require('body-parser');
+  bodyParser = require('body-parser'),
+  methodOverride = require('method-override');
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 mongoose.connect("mongodb://localhost/blogapp", function (err) {
   if (err) {
     console.log("Error connecting: " + err);
@@ -16,7 +18,7 @@ var postSchema = new mongoose.Schema({
   title: String,
   image: String,
   body: String,
-  created: { type: Date, default: Date.now }
+  created: {type: Date, default: Date.now}
 });
 
 var Post = mongoose.model("Post", postSchema);
@@ -32,7 +34,7 @@ app.get("/posts", function (req, res) {
       console.log(err);
     }
     else {
-      res.render("index", { posts: posts });
+      res.render("index", {posts: posts});
     }
   });
 });
@@ -59,7 +61,31 @@ app.get("/posts/:id", function (req, res) {
       res.redirect("/posts");
     }
     else {
-      res.render("show", { post: post });
+      res.render("show", {post: post});
+    }
+  });
+});
+
+//EDIT
+app.get("/posts/:id/edit", function (req, res) {
+  Post.findById(req.params.id, function (err, post) {
+    if (err) {
+      res.redirect("/posts");
+    }
+    else {
+      res.render("edit", {post: post});
+    }
+  });
+});
+
+//UPDATE
+app.put("/posts/:id", function (req, res) {
+  Post.findByIdAndUpdate(req.params.id, req.body.post, function (err, post) {
+    if (err) {
+      res.redirect("/posts");
+    }
+    else {
+      res.redirect("/posts/" + req.params.id);
     }
   });
 });

@@ -1,0 +1,22 @@
+<% include partials/header %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">Edit <%= post.title %></div>
+    <form class="ui form" action="/posts/<%= post._id %>?_method=PUT" method="POST">
+        <div class="field">
+            <label>Post Title: <input type="text" name="post[title]" value="<%= post.title %>"></label>
+        </div>
+        <div class="field">
+            <label>Image URL: <input type="text" name="post[image]" value="<%= post.image %>"></label>
+        </div>
+        <div class="field">
+            <label>Post Body: <textarea name="post[body]" id="" cols="30" rows="10"><%= post.body %></textarea></label>
+        </div>
+        <!--<div class="field">-->
+        <!--<label>Post Date (blank for now):  <input type="datetime-local" name="post[created]"> </label>-->
+        <!--</div>-->
+        <input class="ui orange big basic button" type="submit">
+    </form>
+</div>
+
+<% include partials/footer %>
